@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine&effect=3d">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Starbucks Coffee Shop</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .app-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background-color: #006241;
+      padding: 15px;
+    }
+
+    nav button {
+      background-color: #fff;
+      color: #006241;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #f0f0f0;
+    }
+
+    .menu-navigation {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .main-categories {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .subcategories {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .main-categories button, .subcategories button {
+      background-color: #f0f0f0;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .main-categories button.active, .subcategories button.active {
+      background-color: #006241;
+      color: white;
+    }
+
+    .coffee-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .coffee-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .coffee-card img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .cart-container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+
+    .contact-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 500px;
+      gap: 10px;
+    }
+
+    form input, form textarea {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .contact-info {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .return-button {
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 30px;
+      background: #017143;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 40px;
+      border: 1px solid black;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.h2 {
+    font-family: 'Lobster';
+    font-size: 9rem;
+}
+
+
+.contact {
+    position: relative;
+    min-height: 100vh;
+    padding: 50px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #222;
+}
+
+.contact .content {
+    max-width: 800px;
+    text-align: center;
+}
+
+.contact .content h2 {
+    font-family: 'Lobster';
+    font-size: 2em;
+    color: aliceblue;
+    font-weight: 600;
+}
+
+.contact .content p {
+    color: aliceblue;
+    font-size: 1.2em;
+    font-weight: 300;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 30px;
+}
+
+.container .contactinfo {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container .contactinfo .box {
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+    cursor: pointer;
+}
+
+.container .contactinfo .box .icon {
+    position: relative;
+    min-width: 60px;
+    height: 60px;
+    background: repeating-conic-gradient(from 27.5deg, #01bdc2 0%,#01bdc2 10%,transparent 10%,transparent 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .contactinfo .box .icon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(from 117.5deg, #01bdc2 0%,#01bdc2 10%,transparent 10%,transparent 50%);
+}
+
+.container .contactinfo .box .icon::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    background-color: #222;
+}
+
+.container .contactinfo .box .icon b {
+    position: absolute;
+    inset: 8px;
+    background-color: #01bdc2;
+    z-index: 2;
+}
+
+.container .contactinfo .box .icon i {
+    position: relative;
+    z-index: 1000;
+    font-size: 1.5em;
+}
+
+.container .contactinfo .box .text {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-left: 70px;
+    font-size: 1.3em;
+    color: aliceblue;
+    font-family: "satisfy";
+    font-weight: 500;
+}
+
+.container .contactinfo .box .text h3 {
+    color: #01bdc2;
+}
+
+.container .contactinfo .txt {
+    color: aliceblue;
+    margin-top: 50px;
+    font-weight: 500;
+    border-left: 40px solid #01bdc2;
+    padding-left: 10px;
+    line-height: 1em;
+}
+
+.container .contactinfo .sci {
+    position: relative;
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.container .contactinfo .sci li {
+    list-style: none;
+}
+
+.container .contactinfo .sci li a {
+    color: aliceblue;
+    font-size: 1.5em;
+    transition: 0.3s;
+}
+
+.container .contactinfo .sci li a:hover {
+    color: #01bdc2;
+    filter: drop-shadow(0 0 5px #63bbbe);
+}
+
+.h22,span {
+    font-family: 'Satisfy';
+}
+
+.container .contactform {
+    position: relative;
+    width: 40%;
+    background: repeating-conic-gradient(from var(--a),#01bdc2 0%,#01bdc2 10%,transparent 10%,transparent 50%);
+    animation: animate 6s linear infinite;
+    padding: 60px;
+}
+
+@property --a {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes animate {
+    0% {
+        --a :0deg;
+    }
+    
+    100% {
+        --a:360deg;
+    }
+}
+
+.container .contactform::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(from var(--a),#01bdc2 0%,#01bdc2 10%,transparent 10%,transparent 50%);
+    animation: animate 6s linear infinite;
+    animation-delay: -1.5s;
+    border-radius:10px;
+}
+
+.container .contactform::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 20px solid #222;
+    background: #333;  
+    border-radius: 10px; 
+}
+
+.container .contactform form {
+    position: relative;
+    z-index: 10;
+}
+
+.container .contactform form h2 {
+    font-size: 2em;
+    color: aliceblue;
+}
+
+.container .contactform form .inputBox {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.container .contactform form .inputBox input,.container .contactform form .inputBox textarea  {
+    width: 100% !important;
+    padding: 5px 0;
+    font-size: 1.1em;
+    margin-top: 10px 0;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid #01bdc2;
+    color: aliceblue;
+    outline: none;resize: none;
+}
+
+.container .contactform form .inputBox span {
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    pointer-events: none;
+    font-size: 1.10em;
+    color: aliceblue;
+    transition: 0.91s;   
+}
+
+.top {
+    position: absolute;
+    left: 0;
+    bottom:49px;
+    top: 0;
+}
+
+textarea {
+    margin-top: 23px;
+}
+
+.container .contactform form .inputBox input:focus ~ span,
+.container .contactform form .inputBox textarea:focus ~ span,
+.container .contactform form .inputBox input:valid ~ span,
+.container .contactform form .inputBox textarea:valid ~ span  {
+    color: #01bdc2;    
+    font-size: 0.9em;
+    transform: translateY(-9px);
+}
+
+.container .contactform form .inputBox input[type="submit"] {
+    width: 100%;
+    background: #01bdc2;
+    color: #222;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 1.1em;
+    font-weight: 300;
+    font-family: "Tangerine";
+    font-size: xx-large;
+    
+}
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <nav>
+      <button onclick="setPage('menu')">Menu</button>
+      <button onclick="setPage('cart')">Cart (<span id="cart-count">0</span>)</button>
+      <button onclick="setPage('contact')">Contact</button>
+    </nav>
+    <div id="content"></div>
+    <a href="./web.htm" class="return-button">Home</a>
+  </div>
+
+  <script>
+    // Starbucks menu data
+    const starbucksMenu = {
+      Drinks: {
+        "Hot Coffee": [
+          { id: 1, name: "Caramel Macchiato", price: 4.50, image: "https://maxm-imggenurl.web.val.run/caramel-macchiato" },
+          { id: 2, name: "Espresso", price: 2.75, image: "https://maxm-imggenurl.web.val.run/espresso" },
+          { id: 3, name: "Pike Place® Roast", price: 3.25, image: "https://maxm-imggenurl.web.val.run/espresso-roast" },
+          { id: 16, name: "Blonde Roast", price: 3.25, image: "img/Screenshot 2025-04-10 195826.png" },
+          { id: 17, name: "Dark Roast", price: 3.25, image: "https://maxm-imggenurl.web.val.run/dark-roast" },
+          { id: 18, name: "Caffè Americano", price: 3.45, image: "https://maxm-imggenurl.web.val.run/caffe-americano" },
+          { id: 19, name: "Caffè Misto", price: 3.75, image: "https://maxm-imggenurl.web.val.run/caffe-misto" },
+          { id: 20, name: "Cinnamon Dolce Latte", price: 4.75, image: "https://maxm-imggenurl.web.val.run/cinnamon-dolce-latte" },
+          { id: 21, name: "Flat White", price: 4.25, image: "https://maxm-imggenurl.web.val.run/flat-white" },
+          { id: 22, name: "Honey Almondmilk Flat White", price: 4.75, image: "img/download (1).jpg" }
+        ],
+        "Cold Coffee": [
+          { id: 4, name: "Cold Brew", price: 3.95, image: "https://maxm-imggenurl.web.val.run/cold-brew" },
+          { id: 5, name: "Vanilla Latte", price: 4.25, image: "https://maxm-imggenurl.web.val.run/vanilla-latte" },
+          { id: 23, name: "Nitro Cold Brew", price: 4.45, image: "https://maxm-imggenurl.web.val.run/nitro-cold-brew" },
+          { id: 24, name: "Iced Caramel Macchiato", price: 4.75, image: "https://maxm-imggenurl.web.val.run/iced-caramel-macchiato" },
+          { id: 25, name: "Iced Caffè Mocha", price: 4.45, image: "https://maxm-imggenurl.web.val.run/iced-caffe-mocha" },
+          { id: 26, name: "Iced Caffè Latte", price: 3.95, image: "https://maxm-imggenurl.web.val.run/iced-caffe-latte" },
+          { id: 27, name: "Salted Caramel Cream Cold Brew", price: 4.95, image: "https://maxm-imggenurl.web.val.run/salted-caramel-cold-brew" },
+          { id: 28, name: "Iced White Chocolate Mocha", price: 4.75, image: "https://maxm-imggenurl.web.val.run/iced-white-chocolate-mocha" },
+          { id: 29, name: "Iced Blonde Vanilla Latte", price: 4.45, image: "https://maxm-imggenurl.web.val.run/iced-blonde-vanilla-latte" },
+          { id: 30, name: "Iced Caffè Americano", price: 3.45, image: "https://maxm-imggenurl.web.val.run/iced-caffe-americano" }
+        ],
+        "Frappuccino® Blended Beverage": [
+          { id: 31, name: "Caramel Frappuccino®", price: 4.95, image: "https://maxm-imggenurl.web.val.run/caramel-frappuccino" },
+          { id: 32, name: "Mocha Frappuccino®", price: 4.75, image: "https://maxm-imggenurl.web.val.run/mocha-frappuccino" },
+          { id: 33, name: "Java Chip Frappuccino®", price: 4.95, image: "https://maxm-imggenurl.web.val.run/java-chip-frappuccino" },
+          { id: 34, name: "White Chocolate Cream Frappuccino®", price: 4.45, image: "https://maxm-imggenurl.web.val.run/white-chocolate-frappuccino" },
+          { id: 35, name: "Strawberries & Cream Frappuccino®", price: 4.75, image: "https://maxm-imggenurl.web.val.run/strawberries-cream-frappuccino" },
+          { id: 36, name: "Vanilla Bean Cream Frappuccino®", price: 4.25, image: "https://maxm-imggenurl.web.val.run/vanilla-bean-frappuccino" },
+          { id: 37, name: "Caramel Ribbon Crunch Frappuccino®", price: 5.25, image: "img/Screenshot 2025-04-10 195650.png" },
+          { id: 38, name: "Espresso Frappuccino®", price: 4.45, image: "https://maxm-imggenurl.web.val.run/espresso-frappuccino" },
+          { id: 39, name: "Chai Crème Frappuccino®", price: 4.55, image: "https://maxm-imggenurl.web.val.run/chai-creme-frappuccino" },
+          { id: 40, name: "Matcha Crème Frappuccino®", price: 4.65, image: "https://maxm-imggenurl.web.val.run/matcha-creme-frappuccino" }
+        ],
+        "Refreshers": [
+          { id: 8, name: "Strawberry Açaí", price: 4.75, image: "https://maxm-imggenurl.web.val.run/strawberry-acai" },
+          { id: 9, name: "Mango Dragonfruit", price: 4.95, image: "img/Screenshot 2025-04-10 195010.png" },
+          { id: 41, name: "Pineapple Passionfruit", price: 4.85, image: "img/image.png" },
+          { id: 42, name: "Very Berry Hibiscus", price: 4.65, image: "img/Screenshot 2025-04-10 195351.png" },
+          { id: 43, name: "Violet Drink", price: 5.25, image: "https://maxm-imggenurl.web.val.run/violet-drink" },
+          { id: 44, name: "Pink Drink", price: 5.25, image: "https://maxm-imggenurl.web.val.run/pink-drink" },
+          { id: 45, name: "Dragon Drink", price: 5.25, image: "https://maxm-imggenurl.web.val.run/dragon-drink" },
+          { id: 46, name: "Paradise Drink", price: 5.25, image: "https://maxm-imggenurl.web.val.run/paradise-drink" },
+          { id: 47, name: "Star Drink", price: 5.25, image: "https://maxm-imggenurl.web.val.run/star-drink" },
+          { id: 48, name: "Kiwi Starfruit", price: 4.75, image: "img/Screenshot 2025-04-10 195454.png" }
+        ]
+      },
+      Food: {
+        "Breakfast": [
+          { id: 10, name: "Bacon, Gouda & Egg Sandwich", price: 5.25, image: "https://maxm-imggenurl.web.val.run/bacon-sandwich" },
+          { id: 11, name: "Spinach, Feta & Egg White Wrap", price: 4.95, image: "https://maxm-imggenurl.web.val.run/spinach-wrap" },
+          { id: 49, name: "Impossible™ Breakfast Sandwich", price: 5.75, image: "https://maxm-imggenurl.web.val.run/impossible-breakfast" },
+          { id: 50, name: "Double-Smoked Bacon, Cheddar & Egg Sandwich", price: 5.45, image: "https://maxm-imggenurl.web.val.run/double-smoked-bacon-sandwich" },
+          { id: 51, name: "Egg & Cheese", price: 3.95, image: "https://maxm-imggenurl.web.val.run/egg-cheese" },
+          { id: 52, name: "Sausage, Egg & Cheese", price: 4.75, image: "https://maxm-imggenurl.web.val.run/sausage-egg-cheese" },
+          { id: 53, name: "Ham, Egg & Cheese", price: 4.55, image: "https://maxm-imggenurl.web.val.run/ham-egg-cheese" },
+          { id: 54, name: "Bacon, Egg & Cheese", price: 4.75, image: "https://maxm-imggenurl.web.val.run/bacon-egg-cheese" },
+          { id: 55, name: "Veggie & Egg White", price: 4.45, image: "https://maxm-imggenurl.web.val.run/veggie-egg-white" },
+          { id: 56, name: "Turkey Bacon, Egg & Cheese", price: 4.95, image: "https://maxm-imggenurl.web.val.run/turkey-bacon-egg-cheese" }
+        ],
+        "Bakery": [
+          { id: 12, name: "Butter Croissant", price: 2.95, image: "https://maxm-imggenurl.web.val.run/croissant" },
+          { id: 13, name: "Blueberry Scone", price: 3.25, image: "https://maxm-imggenurl.web.val.run/blueberry-scone" },
+          { id: 57, name: "Chocolate Croissant", price: 3.45, image: "https://maxm-imggenurl.web.val.run/chocolate-croissant" },
+          { id: 58, name: "Banana Nut Loaf", price: 3.75, image: "https://maxm-imggenurl.web.val.run/banana-nut-loaf" },
+          { id: 59, name: "Lemon Loaf", price: 3.55, image: "https://maxm-imggenurl.web.val.run/lemon-loaf" },
+          { id: 60, name: "Cinnamon Roll", price: 3.95, image: "https://maxm-imggenurl.web.val.run/cinnamon-roll" },
+          { id: 61, name: "Cheese Danish", price: 3.25, image: "https://maxm-imggenurl.web.val.run/cheese-danish" },
+          { id: 62, name: "Apple Fritter", price: 3.75, image: "https://maxm-imggenurl.web.val.run/apple-fritter" },
+          { id: 63, name: "Cranberry Orange Scone", price: 3.45, image: "https://maxm-imggenurl.web.val.run/cranberry-orange-scone" },
+          { id: 64, name: "Chocolate Chip Cookie", price: 2.45, image: "https://maxm-imggenurl.web.val.run/chocolate-chip-cookie" }
+        ]
+      },
+      "At Home Coffee": {
+        "Whole Bean": [
+          { id: 14, name: "Veranda Blend®", price: 14.95, image: "img/Screenshot 2025-04-10 202306.png" },
+          { id: 15, name: "Pike Place® Roast", price: 13.95, image: "img/Screenshot 2025-04-10 202452.png" },
+          { id: 65, name: "Espresso Roast", price: 15.95, image: "img/image copy.png" },
+          { id: 66, name: "Sumatra Dark Roast", price: 16.50, image: "img/image copy 2.png" },
+          { id: 67, name: "Guatemala Antigua", price: 15.50, image: "img/Screenshot 2025-04-10 202755.png" },
+          { id: 68, name: "Kenya", price: 16.95, image: "img/image copy 3.png" },
+          { id: 69, name: "Ethiopia", price: 17.50, image: "img/image copy 4.png" },
+          { id: 70, name: "Blonde Roast", price: 14.50, image: "img/image copy 5.png" },
+          { id: 71, name: "Caffe Verona", price: 15.75, image: "img/image copy 6.png" },
+          { id: 72, name: "Italian Roast", price: 16.25, image: "img/Screenshot 2025-04-10 202608.png" }
+        ],
+        "VIA® Instant": [
+          { id: 73, name: "VIA® Instant Pike Place® Roast", price: 9.95, image: "img/Screenshot 2025-04-10 202944.png" },
+          { id: 74, name: "VIA® Instant Caramel", price: 10.50, image: "img/image copy 7.png" },
+          { id: 75, name: "VIA® Instant Vanilla Latte", price: 10.75, image: "img/image copy 8.png" },
+          { id: 76, name: "VIA® Instant Espresso", price: 9.75, image: "img/image copy 9.png" },
+          { id: 77, name: "VIA® Instant Colombian", price: 10.25, image: "img/Screenshot 2025-04-10 202925.png" },
+          { id: 78, name: "VIA® Instant Mocha", price: 10.95, image: "img/image copy 10.png" },
+          { id: 79, name: "VIA® Instant Caffe Latte", price: 10.50, image: "img/image copy 11.png" },
+          { id: 80, name: "VIA® Instant Dark Roast", price: 9.95, image: "img/Screenshot 2025-04-10 221027.png" },
+          { id: 81, name: "VIA® Instant Blonde Roast", price: 9.75, image: "img/Screenshot 2025-04-10 203105.png" },
+          { id: 82, name: "VIA® Instant Peppermint Mocha", price: 11.25, image: "img/image copy 12.png" }
+        ]
+      }
+    };
+
+    // Main variables
+    let cart = [];
+    let currentCategory = 'Drinks';
+    let currentSubcategory = 'Hot Coffee';
+
+    // Function to update the cart count display
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    // Function to add an item to the cart
+    function addToCart(item) {
+      // Check if the item is already in the cart
+      const existingItem = cart.find(cartItem => cartItem.id === item.id);
+      
+      if (existingItem) {
+        // If already in cart, increase quantity
+        existingItem.quantity += 1;
+      } else {
+        // If not in cart, add with quantity of 1
+        cart.push({...item, quantity: 1});
+      }
+      
+      // Update the cart count display
+      updateCartCount();
+    }
+
+    // Function to remove an item from the cart
+    function removeFromCart(itemId) {
+      cart = cart.filter(item => item.id !== itemId);
+      
+      // Refresh the cart page
+      if (currentPage === 'cart') {
+        renderCart();
+      }
+      
+      // Update the cart count display
+      updateCartCount();
+    }
+
+    // Function to set the main category and subcategory
+    function setCategory(category, subcategory) {
+      currentCategory = category;
+      currentSubcategory = subcategory || Object.keys(starbucksMenu[category])[0];
+      renderMenu();
+    }
+
+    // Function to set the subcategory
+    function setSubcategory(subcategory) {
+      currentSubcategory = subcategory;
+      renderMenu();
+    }
+
+    // Function to render the menu
+    function renderMenu() {
+      const content = document.getElementById('content');
+      
+      // Create navigation buttons for categories and subcategories
+      let menuHTML = `
+        <div class="menu-container">
+          <div class="menu-navigation">
+            <div class="main-categories">
+              ${Object.keys(starbucksMenu).map(category => 
+                `<button 
+                  onclick="setCategory('${category}')" 
+                  class="${currentCategory === category ? 'active' : ''}"
+                >
+                  ${category}
+                </button>`
+              ).join('')}
+            </div>
+            <div class="subcategories">
+              ${Object.keys(starbucksMenu[currentCategory]).map(subcategory => 
+                `<button 
+                  onclick="setSubcategory('${subcategory}')" 
+                  class="${currentSubcategory === subcategory ? 'active' : ''}"
+                >
+                  ${subcategory}
+                </button>`
+              ).join('')}
+            </div>
+          </div>
+          <div class="coffee-grid">
+            ${starbucksMenu[currentCategory][currentSubcategory].map(item => `
+              <div class="coffee-card">
+                <img src="${item.image}" alt="${item.name}">
+                <h3>${item.name}</h3>
+                <p>$${item.price.toFixed(2)}</p>
+                <button onclick='addToCart(${JSON.stringify(item)})'>Add to Cart</button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      
+      content.innerHTML = menuHTML;
+    }
+
+    // Function to render the cart
+    function renderCart() {
+      const content = document.getElementById('content');
+      
+      let cartHTML = `
+        <div class="cart-container">
+          <h1>🛒 Your Cart</h1>
+          ${cart.length === 0 ? 
+            '<p>Your cart is empty</p>' : 
+            cart.map(item => `
+              <div class="cart-item">
+                <span>${item.name}</span>
+                <span>Quantity: ${item.quantity}</span>
+                <span>Total: $${(item.price * item.quantity).toFixed(2)}</span>
+                <button onclick="removeFromCart(${item.id})">Remove</button>
+              </div>
+            `).join('')
+          }
+          <p>Total: $${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</p>
+        </div>
+      `;
+      
+      content.innerHTML = cartHTML;
+    }
+
+    // Function to render the contact page
+    function renderContact() {
+      const content = document.getElementById('content');
+      
+      let contactHTML = `
+        <section class="contact">
+        <div class="content">
+            <h2 class="h2">Contact Us</h2>
+            <p>
+                We’d love to hear from you! Whether you have a question, feedback, 
+                or need assistance, our team is here to help.
+            </p>
+        </div>
+        <div class="container">
+            <div class="contactinfo">
+                <div class="box">
+                    <div class="icon"><b></b><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="text">
+                            <h3>Address</h3>
+                            <p>1 The Greatest Of All Time Estate, New-York City</p>
+                        </div>
+                    </div>
+                <div class="box">
+                    <div class="icon"><b></b><i class="fa-solid fa-phone-volume"></i></div>
+                        <div class="text">
+                            <h3>Phone <u>no</u></h3>
+                            <p>0815 235 6408</p>
+                            
+                        </div>
+                        
+                        </div>
+                        <div class="box">
+                            <div class="icon"><b></b><i class="fa-brands fa-whatsapp"></i></div>
+                            <div class="text">
+                                <h3>WhatsApp <u>no</u></h3>
+                            <p>+234 816 507 6493</p>
+                            </div>
+                        </div>
+                    <div class="box">
+                        <div class="icon"><b></b><i class="fa-solid fa-envelope"></i></div>
+                            <div class="text">
+                                <h3>E-Mail</h3>
+                                <p>thegreatestofalltimes1.0@gmail.com</p>
+                            </div>
+                 </div> 
+                 <h2 class="txt">Connect With Us</h2> 
+                 <ul class="sci">
+                    <li><a href="https://web.facebook.com/?_rdc=1&_rdr#"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="https://www.linkedin.com/feed/"><i class="fa-brands fa-x-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://x.com/home"><i class="fa-brands fa-linkedin"></i></a></li>
+                 </ul>  
+            </div>
+            <div class="contactform">
+                <form action="https://formspree.io/f/xgvorgpw" method="POST">
+                    <h2 class="h22">Send Message</h2>
+                    <div class="inputBox">
+                        <input type="name" name="name" required="required" placeholder="Enter your Full-Name Here!.">
+                        <span>Full-Name</span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="email" name="email" required="required" placeholder="Enter your  Email Here!.">
+                        <span>Email</span>
+                    </div>
+                    <div class="inputBox">
+                        <textarea name="message" type="textarea" required="required" placeholder="Type Your Message Here......."></textarea>
+                        <span class="top">Type Your Message.......</span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" value="Send" class="buton">    
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+      `;
+      
+      content.innerHTML = contactHTML;
+    }
+
+    // Function to handle contact form submission
+    function handleContactForm(event) {
+      event.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      event.target.reset();
+    }
+
+    // Current page tracker
+    let currentPage = 'menu';
+
+    // Function to change the current page
+    function setPage(page) {
+      currentPage = page;
+      
+      // Render the appropriate page content
+      switch(page) {
+        case 'menu':
+          renderMenu();
+          break;
+        case 'cart':
+          renderCart();
+          break;
+        case 'contact':
+          renderContact();
+          break;
+      }
+    }
+
+    // Initialize the page with the menu
+    setPage('menu');
+  </script>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+        .then(function () {
+          alert('Email sent successfully!');
+        }, function (error) {
+          alert('Failed to send email. Error: ' + JSON.stringify(error));
+        });
+    });
+  </script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS public key
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f2f2f2;
+      color: #333;
+    }
+
+    header {
+      background-color: #006241;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .image-section {
+      text-align: center;
+    }
+
+    .image-section img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .info {
+      margin-top: 1.5rem;
+    }
+
+    .info h2 {
+      color: #006241;
+      margin-bottom: 0.5rem;
+    }
+
+    .info p {
+      line-height: 1.6;
+    }
+
+    .more-text {
+      display: none;
+      margin-top: 1rem;
+      color: #444;
+    }
+
+    .btn {
+      background-color: #006241;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #004d33;
+    }
+
+    .return-btn {
+      text-decoration: none;
+      margin-left: 90px;
+      background: #006241;
+      color: aliceblue;
+      padding: 8px 20px;
+      border-radius: 30px;
+    }
+
+    span {
+      font-size: 20px;
+      color: #006241;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Learn More About Starbucks</h1>
+  </header>
+
+  <div class="container">
+    <div class="image-section">
+      <img src="./img/spilled-coffee.png" alt="Starbucks Coffee" />
+    </div>
+
+    <div class="info">
+      <h2>Our Passion for Coffee</h2>
+      <p>
+        At <span>Starbucks</span>, we are passionate about ethically sourcing and roasting the highest quality arabica coffee in the world.
+      </p>
+      <div class="more-text" id="moreText">
+        <p>
+          From our humble beginnings as a single store in Seattle’s historic Pike Place Market, we've grown into a global brand with over 30,000 stores worldwide.
+          We believe in serving not just coffee, but experiences — building a place where everyone feels welcome and valued.
+        </p>
+        <p>
+          We are also deeply committed to sustainability, community engagement, and creating a culture of warmth and belonging.
+        </p> <br>
+        <p>
+          <span>Starbucks'</span> story began in Seattle in 1971 when Jerry Baldwin, Zev Siegl, and Gordon Bowker opened their first store in the historic Pike Place Market, focusing on selling high-quality coffee beans and equipment. Initially, they were roasters and retailers of whole bean and ground coffee, tea, and spices. Much of Starbucks' later success is attributed to Howard Schultz, who expanded the company into a global coffeehouse chain. Today, Starbucks connects with millions of customers daily through its extensive network of stores and its commitment to exceptional products and a sense of community. 
+          Here's a more detailed look at the Starbucks story: <br>
+          Early Years (1971): <br>
+          Three friends, Jerry Baldwin, Zev Siegl, and Gordon Bowker, envisioned a business centered around high-quality coffee.  <br>
+          Their first store opened in Seattle's Pike Place Market, offering a variety of whole-bean coffees and related equipment. 
+          Howard Schultz's Influence:
+          Howard Schultz joined <span>Starbucks</span> in 1982 and played a key role in expanding the company's vision beyond just selling coffee.<br>
+          He traveled to Italy and was inspired by the coffeehouse culture, which he brought back to <span>Starbucks</span>. <br>
+          Expansion and Growth:
+          Under Schultz's leadership, <span>Starbucks</span> transitioned from a coffee bean retailer to a global coffeehouse chain, focusing on creating an inviting atmosphere and genuine service. 
+          The company's mission became "to inspire and nurture the human spirit – one person, one cup, and one neighborhood at a time". <br>
+          Continued Evolution:
+          <span>Starbucks</span> continued to innovate, offering a wide range of beverages and products, including specialty drinks, teas, and pastries.
+          They also emphasized their commitment to sustainability and ethical sourcing of coffee beans. <br>
+          Key Milestones:<br>
+          1992: <span>Starbucks</span> went public, marking a significant step in its growth and development.<br>
+          1985: <span>Starbucks</span> was incorporated.<br>
+          2025: <span>Starbucks</span> continues to evolve, with a focus on innovation and sustainability. <br>
+        </p>
+      </div>
+      <button class="btn" onclick="toggleMore()">Learn More</button>
+    </div>
+  </div>
+
+  <a href="./web.htm" class="return-btn">Home</a>
+
+  <script>
+    function toggleMore() {
+      const moreText = document.getElementById('moreText');
+      const button = document.querySelector('.btn');
+
+      if (moreText.style.display === 'block') {
+        moreText.style.display = 'none';
+        button.textContent = 'Learn More';
+      } else {
+        moreText.style.display = 'block';
+        button.textContent = 'Show Less';
+      }
+    }
+  </script>
+</body>
+</html>
